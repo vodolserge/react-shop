@@ -93,6 +93,29 @@ nav{
   color: #26a69a;
 }
 
+#toast-container {
+  top: 3rem !important;
+  animation: fadeIn 250ms ease-in-out;
+}
+
+#toast-container .toast {
+  background: #43A047;
+  font-weight: 700;
+  line-height: 1.3rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
 
 
 

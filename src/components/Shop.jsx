@@ -4,6 +4,7 @@ import {GoodsList} from "./GoodsList";
 import {apiKey, apiUrl} from "../helpers/params"
 import {Cart} from "./Cart"
 import {CartList} from "./CartList"
+import {Flash} from "./Flash"
 
 /**
  * Shop component.
@@ -13,6 +14,12 @@ function Shop () {
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
     const [isCartVisible, setCartVisible] = useState(false);
+    const [flashName, setFlashName] = useState('');
+
+    const closeFlash = () => {
+        console.log("Aga!");
+        setFlashName('');
+    }
 
     const addToCart = (item) => {
         const itemIdx = order.findIndex((orderItem) => orderItem.id === item.id);
@@ -34,6 +41,8 @@ function Shop () {
 
             setOrder(newOrder);
         }
+
+        setFlashName(item.name);
     }
 
     const increaseItemsQty = (itemId) => {
@@ -107,6 +116,7 @@ function Shop () {
                              decreaseItemsQty={decreaseItemsQty}
                 />
             }
+            {flashName && <Flash name={flashName} close={closeFlash}/>}
         </main>
     );
 }
