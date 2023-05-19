@@ -9,7 +9,8 @@ function GoodsItem(props) {
         displayName,
         displayDescription,
         price,
-        displayAssets
+        displayAssets,
+        addToCart = Function.prototype,
      } = props;
 
     return (
@@ -22,7 +23,13 @@ function GoodsItem(props) {
                 <p>{displayDescription}</p>
             </div>
             <div className="card-action">
-                <button className="btn">Buy</button>
+                <button className="btn" onClick={ () => {
+                    addToCart({
+                        id: mainId,
+                        name :displayName,
+                        price: price['finalPrice']
+                    })
+                }}>Buy</button>
                 <span className="right" style={{fontSize: '1.8rem'}}>{price['finalPrice']} $</span>
             </div>
         </div>

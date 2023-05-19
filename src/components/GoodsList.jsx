@@ -6,7 +6,7 @@ import {GoodsItem} from "./GoodsItem"
  * @constructor
  */
 function GoodsList(props) {
-    const {goods = []} = props;
+    const {goods = [], addToCart = Function.prototype} = props;
 
     if (!goods.length) {
         return <h3>Nothing found</h3>;
@@ -17,7 +17,7 @@ function GoodsList(props) {
     return (
         <div className="goods">
             {goodsFiltered.map((item) => (
-                <GoodsItem key={item['mainId']} {...item}/>
+                <GoodsItem key={item['mainId']} {...item} addToCart={addToCart}/>
             ))}
         </div>
     );
