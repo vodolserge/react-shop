@@ -1,6 +1,7 @@
 {
   "short_name": "React shop",
   "name": "React portfolio app: React shop",
+  "homepage": "https://vodolserge.github.io/react-tiny-app-movies/",
   "icons": [
     {
       "src": "favicon.ico",
