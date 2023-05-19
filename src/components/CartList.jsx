@@ -12,12 +12,16 @@ function CartList (props) {
         qty = 0,
         order = [],
         handleCartVisibility = Function.prototype,
-        removeItemFromCart = Function.prototype
+        removeItemFromCart = Function.prototype,
+        increaseItemsQty = Function.prototype,
+        decreaseItemsQty = Function.prototype,
     } = props;
     const totalPrice = order.reduce((sum, currentValue, currentIndex) => {
         return sum + (currentValue.price * currentValue.qty);
     }, 0);
-    const totalPriceEl = qty ? <li className="collection-item">Total price: {totalPrice} $</li> : '';
+    const totalPriceEl = qty ? <li className="collection-item active">
+        Total price: {totalPrice} $
+    </li> : '';
 
     return (
         <ul className="collection cart-list">
@@ -27,10 +31,16 @@ function CartList (props) {
                     return <CartItem
                         key={orderItem.id} {...orderItem}
                         removeItemFromCart={removeItemFromCart}
+                        increaseItemsQty={increaseItemsQty}
+                        decreaseItemsQty={decreaseItemsQty}
                     />
                 }) : <li className="collection-item">Cart is empty</li>
             }
             {totalPriceEl}
+            <li className="collection-item">
+                <button className="btn btn-small">Checkout</button>
+            </li>
+
             <i className="material-icons cart-close" onClick={handleCartVisibility}>close</i>
         </ul>
     );

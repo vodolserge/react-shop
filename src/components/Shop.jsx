@@ -36,6 +36,37 @@ function Shop () {
         }
     }
 
+    const increaseItemsQty = (itemId) => {
+        const newOrder = order.map((orderItem) => {
+            if (orderItem.id === itemId) {
+                const newQty = orderItem.qty + 1;
+
+                return  {...orderItem, qty: newQty};
+            }
+
+            return orderItem;
+        });
+
+        setOrder(newOrder);
+    }
+
+    const decreaseItemsQty = (itemId) => {
+        const newOrder = order.map((orderItem) => {
+            if (orderItem.id === itemId) {
+                const newQty = orderItem.qty - 1;
+
+                return  {
+                    ...orderItem,
+                    qty: newQty >= 0 ? newQty : 0,
+                };
+            }
+
+            return orderItem;
+        });
+
+        setOrder(newOrder);
+    }
+
     const handleCartVisibility = () => {
         setCartVisible(!isCartVisible);
     }
@@ -71,7 +102,10 @@ function Shop () {
                 && <CartList qty={order.length}
                              order={order}
                              handleCartVisibility={handleCartVisibility}
-                             removeItemFromCart={removeItemFromCart}/>
+                             removeItemFromCart={removeItemFromCart}
+                             increaseItemsQty={increaseItemsQty}
+                             decreaseItemsQty={decreaseItemsQty}
+                />
             }
         </main>
     );

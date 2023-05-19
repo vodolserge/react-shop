@@ -87,7 +87,11 @@ nav{
   }
 }
 
-
+.cart-items-qty-controls {
+  cursor: pointer;
+  vertical-align: middle;
+  color: #26a69a;
+}
 
 
 
