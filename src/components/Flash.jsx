@@ -1,18 +1,18 @@
-import {useEffect} from "react";
+import {useEffect, useContext} from "react";
+import {ShopContext} from "../context";
+
 /**
  * `Flash` component.
  * It shows flashing message after an item added to the Shopping cart.
  *
- * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-function Flash (props) {
-    const {name, close = Function.prototype} = props;
-
+function Flash () {
+    const {closeFlash, flashName: name = ''} = useContext(ShopContext);
 
     useEffect(() => {
-        const timerId = setTimeout(close, 3000);
+        const timerId = setTimeout(closeFlash, 3000);
 
         return () => {
             clearTimeout(timerId);

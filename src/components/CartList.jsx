@@ -1,25 +1,24 @@
 import {CartItem} from "./CartItem"
+import {useContext} from "react";
+import {ShopContext} from "../context";
 
 /**
  * `Cart list` component.
  *
- * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-function CartList (props) {
+function CartList () {
     const {
-        qty = 0,
         order = [],
-        handleCartVisibility = Function.prototype,
-        removeItemFromCart = Function.prototype,
-        increaseItemsQty = Function.prototype,
-        decreaseItemsQty = Function.prototype,
-    } = props;
+        handleCartVisibility = Function.prototype
+    } = useContext(ShopContext);
+
     const totalPrice = order.reduce((sum, currentValue, currentIndex) => {
         return sum + (currentValue.price * currentValue.qty);
     }, 0);
-    const totalPriceEl = qty ? <li className="collection-item active">
+
+    const totalPriceEl = order.length ? <li className="collection-item active">
         Total price: {totalPrice} $
     </li> : '';
 
@@ -28,12 +27,7 @@ function CartList (props) {
             <li className="collection-item active">Cart</li>
             {
                 order.length ? order.map((orderItem) => {
-                    return <CartItem
-                        key={orderItem.id} {...orderItem}
-                        removeItemFromCart={removeItemFromCart}
-                        increaseItemsQty={increaseItemsQty}
-                        decreaseItemsQty={decreaseItemsQty}
-                    />
+                    return <CartItem key={orderItem.id} {...orderItem}/>
                 }) : <li className="collection-item">Cart is empty</li>
             }
             {totalPriceEl}
