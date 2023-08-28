@@ -1,4 +1,4 @@
-import {useEffect, useContext} from "react";
+import {useEffect, useContext, useRef} from "react";
 import {Preloader} from "./Preloader";
 import {GoodsList} from "./GoodsList";
 import {apiKey, apiUrl} from "../helpers/params"
@@ -12,18 +12,24 @@ import {ShopContext} from "../context"
  */
 function Shop () {
     const {flashName, setGoods, loading, isCartVisible} = useContext(ShopContext);
+    const initialized = useRef(false);
 
     useEffect(function getGoods () {
-        fetch(apiUrl, {
-            headers: {
-                'Authorization': apiKey
-            }
-        })
-            .then(res => res.json())
-            .then((data) => {
-                setGoods(data['shop'])
+        if (!initialized.current) {
+            initialized.current = true;
+
+            fetch(apiUrl, {
+                headers: {
+                    'Authorization': apiKey
+                }
             })
+                .then(res => res.json())
+                .then((data) => {
+                    setGoods(data['shop'])
+                })
+        }
     });
+
 
     return (
         <main className="container content">

@@ -20,7 +20,12 @@ function GoodsItem(props) {
     return (
         <div className="card" id={mainId}>
             <div className="card-image">
-                <img src={displayAssets[0]['full_background']} alt={displayName}/>
+                {
+                    displayAssets.length ?
+                        <img src={displayAssets[0]['full_background']} alt={displayName}/>
+                        : <img src="https://fakeimg.pl/350x350/" alt={displayName}/>
+                }
+
             </div>
             <div className="card-content">
                 <span className="card-title">{displayName}</span>
